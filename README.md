@@ -61,6 +61,47 @@ Cierra la ventana negra del monitor (clic en la X o `Ctrl+C`).
 
 ---
 
+## Verificar que funciona (test con archivo incluido)
+
+El repo incluye `test-sample.mp4` — un archivo de 60 segundos con audio corrupto a partir del segundo 25. Úsalo para verificar que todo funciona correctamente.
+
+### Test rápido (analiza el archivo sin overlays)
+
+```bash
+python3 test_file.py test-sample.mp4
+```
+
+**Resultado esperado:**
+- Baseline kurtosis: ~16
+- Primera alerta de CORRUPTION alrededor del segundo 27-28
+- 0 alertas antes del segundo 25 (cero falsos positivos)
+- ~20+ alertas de CORRUPTION después del segundo 25
+
+Si ves esto, el detector funciona correctamente.
+
+### Test con overlays en tiempo real (demo visual)
+
+```bash
+python3 demo_file.py test-sample.mp4
+```
+
+**Qué vas a ver:**
+- Un medidor de audio con timestamp avanzando en tiempo real
+- A los ~27 segundos: overlay rojo **"Audio Corrupted!"** + beeps de alerta
+- Las alertas siguen apareciendo cada ~15 segundos mientras el audio esté corrupto
+
+Este es el mejor test para mostrarle a alguien cómo funciona la herramienta.
+
+### Test en vivo con el micrófono
+
+1. Abre Rode Connect
+2. Ejecuta `python3 monitor.py`
+3. Habla normalmente durante 15 segundos → no debe haber alertas
+4. Desconecta el cable USB → alerta **"Signal Lost!"** en 2 segundos
+5. Reconecta el cable → el monitor sigue funcionando
+
+---
+
 ## Solución de problemas
 
 ### "No se encontró el micrófono"
@@ -92,3 +133,4 @@ Cierra la ventana negra del monitor (clic en la X o `Ctrl+C`).
 | `test_file.py` | Analizar un archivo de audio/video |
 | `demo_file.py` | Demo en tiempo real con un archivo |
 | `setup.sh` | Instalador para Mac (solo la primera vez) |
+| `test-sample.mp4` | Archivo de prueba (audio corrupto a partir de 25s) |
