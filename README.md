@@ -22,7 +22,7 @@ Monitorea el audio del micrófono en tiempo real mientras grabas en OBS. Si el a
 
 2. Copia y pega este comando:
 ```bash
-cd ~/Desktop && git clone https://github.com/TU-USUARIO/audio-monitor.git && cd audio-monitor && bash setup.sh
+cd ~/Desktop && git clone https://github.com/todoloanterior/audio-monitor.git && cd audio-monitor && bash setup.sh
 ```
 
 3. Espera a que termine. Verás un overlay verde que dice **"Setup Complete!"**
